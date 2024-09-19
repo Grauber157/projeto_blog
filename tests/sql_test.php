@@ -18,7 +18,7 @@
     echo '<br>';
 
     //TESTE GERACAO INSERT
-    $inscrucao = Insert($entidade, $dados);
+    $instrucao = Insert($entidade, $dados);
     echo $instrucao.'<BR>';
 
     //TESTE GERACAO UPDATE
