@@ -1,6 +1,6 @@
 <?php
 
-    function insert(string $entidade, array $dados) : string
+    function Insert(string $entidade, array $dados) : string
     {
         $instrucao = "INSERT INTO {$entidade}";
 
@@ -13,10 +13,29 @@
         return $instrucao;
     }
 
-
-    function Update()
+    function Update(string $entidade, array $dados, array $criterio = []) : string
     {
-        
+        $instrucao = "UPDATE {$entidade}";
+
+        foreach($dados as $campo => $dado)
+        {
+            $set[] = "{$campo} = {$dado}";
+        }
+
+        $instrucao .= ' SET ' . implode(' ', $set);
+
+        if(!empty($criterio))
+        {
+            $instrucao .= ' WHERE ';
+
+            foreach($criterio as $expressao)
+            {
+                $instrucao .= ' ' . implode(' ', $expressao);
+            }
+        }
+
+        return $instrucao;
     }
 
+    
 ?>
