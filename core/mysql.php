@@ -58,15 +58,15 @@
             {
                 $nome_campo = $nome_campo . '_' . rand();
             }
-
+ 
             $campos_criterio[] = $nome_campo;
 
             $$nome_campo = $dado;
         }
 
-        $instrucao = Update($entidade, $coringa_dados, $coringa_criterio);
+        $instrucao = update($entidade, $coringa_dados, $coringa_criterio);
         
-        $conexao = Conecta();
+        $conexao = conecta();
 
         $stmt = mysqli_prepare($conexao, $instrucao);
 
