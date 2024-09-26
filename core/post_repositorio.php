@@ -6,11 +6,13 @@
     require_once 'sql.php';
     require_once 'mysql.php';
 
-    foreach($_POST as $indice => $dado) {
+    foreach($_POST as $indice => $dado) 
+    {
         $$indice = limparDados($dado);
     }
 
-    foreach($_GET as $indice => $dado) {
+    foreach($_GET as $indice => $dado) 
+    {
         $$indice = limparDados($dados);
     }
 
@@ -18,14 +20,14 @@
 
     switch($acao){
         case 'insert':
-            $dados =[
+            $dados = [
                 'titulo' => $titulo,
                 'texto' => $texto,
                 'data_postagem' => "$data_postagem $hora_postagem",
                 'usuario_id' => $_SESSION['login']['usuario']['id']
             ];
 
-            insere(
+            insere (
                 'post',
                 $dados
             );
@@ -44,25 +46,24 @@
                     ['id', '=', $id]
                 ];
 
-                atualiza(
+                atualiza (
                     'post',
                     $dados,
                     $criterio
                 );
 
                 break;
+            case 'delete':
+                $criterio = [
+                    ['id', '=', $id]
+                ];
 
-                case 'delete':
-                    $criterio = [
-                        ['id', '=', $id]
-                    ];
+                deleta (
+                    'post',
+                    $criterio
+                );
 
-                    deleta(
-                        'post',
-                        $criterio
-                    );
-
-                    break;
+                break;
     }
 
     header('Location: ../index.php');

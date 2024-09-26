@@ -13,6 +13,7 @@
     foreach($_GET as $indice => $dado){
         $$indice = limparDados($dado);
     }
+
     switch($acao){
         case 'insert':
             $dados =[
@@ -31,49 +32,48 @@
         case 'update':
             $id = (int)$id;
             $dados = [
-                'nome'=> $nome,
+                'nome' => $nome,
                 'email' => $email
                 ];
                 
-                $criterio =[
+                $criterio = [
                     ['id', '-', $id]
-                    ];
+                ];
 
-                atualiza(
+                atualiza (
                     'usuario',
                     $dados,
                     $criterio
                 );
 
                 break;
-
             case 'login':
                 $criterio = [
                     ['email', '=', $email],
                     ['AND', 'ativo', '=', 1]
-                    ];
+                ];
 
-            $retorno = buscar(
+            $retorno = buscar (
                 'usuario',
-                ['id','nome','email','senha','adm'],
+                ['id', 'nome', 'email', 'senha', 'adm'],
                 $criterio
             );
 
-            if(count($retorno) > 0){
-                if(crypt($senha,$salt) == $retorno[0]['senha']){
+            if(count($retorno) > 0) {
+                if(crypt($senha,$salt) == $retorno[0]['senha']) {
                     $_SESSION['login']['usuario'] = $retorno[0];
-                    if(!empty($_SESSION['url_retorno'])){
-                        header('Location:' . $_SESSION['url_retorno']);
+                    if(!empty($_SESSION['url_retorno'])) {
+                        header('Location: ' . $_SESSION['url_retorno']);
                         $_SESSION['url_retorno'] = '';
                         exit;
                     }
                 }
             }
 
-        break;
+            break;
         case 'logout':
-        session_destroy();
-        break;
+            session_destroy();
+            break;
 
             case 'status':
                 $id = (int)$id;
@@ -81,13 +81,13 @@
 
             $dados = [
                 'ativo'=> $valor
-                ];
+            ];
 
             $criterio = [
                 ['id','=', $id]
-                ];
+            ];
 
-            atualiza(
+            atualiza (
                 'usuario',
                 $dados,
                 $criterio
@@ -102,11 +102,11 @@
             
             $dados = [
                 'adm'=> $valor
-                ];
+            ];
 
             $criterio = [
-            ['id','=',$id] 
-                ];
+                ['id', '=', $id] 
+            ];
 
             atualiza(
                 'usuario',
