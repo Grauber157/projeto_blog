@@ -23,7 +23,7 @@
             $set[] = "{$campo} = {$dado}";
         }
 
-        $instrucao .= ' SET ' . implode(' ', $set);
+        $instrucao .= ' SET ' . implode(', ', $set);
 
         if(!empty($criterio))
         {

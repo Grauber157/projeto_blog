@@ -33,7 +33,7 @@
     }
 
     //ATUALIZA
-    function Atualiza(string $entidade, array $dados, array $criterio = []) : bool
+    function atualiza(string $entidade, array $dados, array $criterio = []) : bool
     {
         $retorno = false;
 
@@ -49,7 +49,7 @@
             $dado = $expressao[count($expressao) -1];
 
             $tipo[] = gettype($dado) [0];
-            $expressao[count($expressao) -1] = '?';
+            $expressao[count($expressao) - 1] = '?';
             $coringa_criterio[] = $expressao;
 
             $nome_campo = (count($expressao) < 4) ? $expressao[0] : $expressao[1];
@@ -65,7 +65,6 @@
         }
 
         $instrucao = update($entidade, $coringa_dados, $coringa_criterio);
-        
         $conexao = conecta();
 
         $stmt = mysqli_prepare($conexao, $instrucao);
