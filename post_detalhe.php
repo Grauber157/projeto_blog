@@ -9,22 +9,11 @@
     {
         $$indice = limparDados($dado);
     }
-
-    $posts = buscar (
-        'post',
-        [
-            'titulo',
-            'data_postagem',
-            'texto',
-            '(select nome
-                from usuario
-                where usuario.id = post.usuario_id) as nome'
-        ],
-        [
-            ['id', '=', $post]
-        ]
-    );
+    //Puxa os valores
+    $posts = buscar ('post', ['titulo', 'data_postagem', 'texto', '(select nome from usuario
+            where usuario.id = post.usuario_id) as nome'], [['id', '=', $post]]);
     $post = $posts[0];
+    #Puxa e Formata a data e horario
     $data_post = date_create($post['data_postagem']);
     $data_post = date_format($data_post, 'd/m/Y H:i:s');
 

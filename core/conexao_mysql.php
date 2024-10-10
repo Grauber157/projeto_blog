@@ -19,7 +19,7 @@
         }
         return $conexao;
     }
-
+    //Fecha a conexao
     function desconecta($conexao)
     {
         mysqli_close($conexao);
